@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Dashboard Emas 2026</title>
+    
+    <!-- Font Online (Akan fallback ke font sistem jika offline) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABEL WARNA (TEMA EMAS) --- */
+        :root {
+            --bg-dark: #050505;
+            --bg-card: rgba(20, 20, 20, 0.85);
+            --gold-primary: #d4af37;
+            --gold-light: #f5dc92;
+            --gold-dim: #8a7228;
+            --text-main: #eadc9f;
+            --text-muted: #888;
+            --success: #4ade80;
+            --warning: #fb923c;
+            --border: rgba(212, 175, 55, 0.2);
+        }
+
+        /* --- RESET DASAR --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            background-color: var(--bg-dark);
+            background-image: radial-gradient(circle at top, #1a1500, #000000);
+            color: var(--text-main);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            padding-bottom: 80px; /* Ruang untuk scroll bawah */
+            min-height: 100vh;
+        }
+
+        /* --- TIPOGRAFI --- */
+        h1, .font-serif { font-family: 'Cinzel', serif; }
+        .text-xs { font-size: 11px; }
+        .text-sm { font-size: 14px; }
+        .text-lg { font-size: 18px; }
+        .font-bold { font-weight: 700; }
+        .uppercase { text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- STICKY HEADER (STATS) --- */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .stat-box .label { color: var(--gold-primary); font-size: 10px; font-weight: 600; letter-spacing: 1px; }
+        .stat-box .value { color: #fff; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
+        .progress-line { height: 3px; background: #222; width: 100%; }
+        .progress-fill { height: 100%; background: var(--gold-primary); width: 0%; transition: width 1s ease; box-shadow: 0 0 8px var(--gold-primary); }
+
+        /* --- KONTEN UTAMA --- */
+        .main-content { padding: 20px; max-width: 600px; margin: 0 auto; }
+        
+        .header-title { text-align: center; margin-bottom: 25px; }
+        .header-title h1 { color: var(--gold-light); margin-bottom: 5px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        .header-title p { color: var(--gold-dim); font-size: 12px; letter-spacing: 2px; }
+
+        /* --- TOMBOL FILTER --- */
+        .filter-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            scrollbar-width: none; /* Hide scrollbar Firefox */
+        }
+        .filter-scroll::-webkit-scrollbar { display: none; /* Hide scrollbar Chrome */ }
+        
+        .btn-filter {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--gold-dim);
+            color: var(--gold-light);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 11px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .btn-filter.active { background: var(--gold-primary); color: #000; font-weight: bold; border-color: var(--gold-primary); }
+
+        /* --- KARTU MEMBER --- */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        .card:active { transform: scale(0.98); }
+        
+        /* Indikator Lunas/Belum di samping kiri */
+        .card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 4px;
+        }
+        .card.lunas::before { background: var(--success); box-shadow: 0 0 8px var(--success); }
+        .card.belum::before { background: var(--warning); }
+
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .member-name { font-weight: bold; color: #fff; font-size: 15px; }
+        
+        .badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; letter-spacing: 0.5px; }
+        .badge.lunas { background: rgba(74, 222, 128, 0.15); color: var(--success); border: 1px solid rgba(74, 222, 128, 0.3); }
+        .badge.belum { background: rgba(251, 146, 60, 0.15); color: var(--warning); border: 1px solid rgba(251, 146, 60, 0.3); }
+
+        .progress-mini { height: 6px; background: #222; border-radius: 3px; overflow: hidden; margin: 10px 0; }
+        .bar-mini { height: 100%; border-radius: 3px; }
+        .lunas .bar-mini { background: linear-gradient(90deg, #22c55e, #4ade80); }
+        .belum .bar-mini { background: linear-gradient(90deg, #ca8a04, #facc15); }
+
+        .card-footer { display: flex; justify-content: space-between; align-items: flex-end; font-family: monospace; }
+        .money-label { font-size: 10px; color: var(--text-muted); margin-bottom: 2px; }
+        .money-value { font-size: 13px; color: var(--text-main); }
+        .money-sisa { color: var(--warning); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Stats -->
+    <div class="sticky-header">
+        <div class="stats-container">
+            <div class="stat-box">
+                <div class="label">TERKUMPUL</div>
+                <div class="value font-serif" id="total-uang">Rp 0</div>
+            </div>
+            <div class="stat-box" style="text-align: right;">
+                <div class="label">PROGRES</div>
+                <div class="value" id="persen-total" style="color: var(--gold-light)">0%</div>
+            </div>
+        </div>
+        <div class="progress-line">
+            <div class="progress-fill" id="progress-line"></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        
+        <div class="header-title">
+            <h1>KEILMUAN EMAS</h1>
+            <p>DATA MONITORING 2026</p>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filter-scroll">
+            <button class="btn-filter active" onclick="sortData('name', this)">Abjad A-Z</button>
+            <button class="btn-filter" onclick="sortData('paid', this)">Terbanyak Bayar</button>
+            <button class="btn-filter" onclick="sortData('debt', this)">Sisa Terbanyak</button>
+        </div>
+
+        <!-- List Container -->
+        <div id="list-container">
+            <!-- Data akan masuk di sini via JS -->
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; padding: 20px; border-top: 1px solid var(--border);">
+            <p style="font-style: italic; font-size: 13px; color: var(--gold-dim); font-family: 'Cinzel', serif;">
+                "Ilmu tidak memilih yang cepat,<br>tetapi memilih yang istiqamah."
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // --- DATA ---
+        const TARGET = 1100000;
+        const members = [
+            { id: 1, name: "Ridwan Hanif", paid: 700000 },
+            { id: 2, name: "Yudistira", paid: 1100000 },
+            { id: 3, name: "Ade Sutisna", paid: 250000 },
+            { id: 4, name: "Ahmad Fauzan", paid: 1100000 },
+            { id: 5, name: "Rizky Maulana", paid: 400000 },
+            { id: 6, name: "Deni Firmansyah", paid: 600000 },
+            { id: 7, name: "Agus Salim", paid: 1100000 },
+            { id: 8, name: "Fajar Nugraha", paid: 450000 },
+            { id: 9, name: "Ilham Pratama", paid: 1100000 },
+            { id: 10, name: "Bayu Setiawan", paid: 600000 },
+            { id: 11, name: "Rendi Kurniawan", paid: 1100000 },
+            { id: 12, name: "Arif Rahman", paid: 400000 },
+            { id: 13, name: "Hendra Wijaya", paid: 1100000 },
+            { id: 14, name: "Dimas Saputra", paid: 450000 },
+            { id: 15, name: "Rafi Akbar", paid: 1100000 },
+            { id: 16, name: "Yoga Permana", paid: 600000 },
+            { id: 17, name: "Bagus Santoso", paid: 1100000 },
+            { id: 18, name: "Aditya Prakoso", paid: 400000 },
+            { id: 19, name: "Rian Hidayat", paid: 1100000 },
+            { id: 20, name: "Fikri Alamsyah", paid: 450000 },
+        ];
+
+        // --- FORMAT RUPIAH ---
+        const rupiah = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(n);
+
+        // --- RENDER LOGIC ---
+        function render(data) {
+            const container = document.getElementById('list-container');
+            container.innerHTML = '';
+
+            // Update Header Stats
+            const total = members.reduce((a, b) => a + b.paid, 0);
+            const totalTarget = members.length * TARGET;
+            const percentTotal = (total / totalTarget) * 100;
+            
+            document.getElementById('total-uang').innerText = rupiah(total);
+            document.getElementById('persen-total').innerText = percentTotal.toFixed(1) + "%";
+            document.getElementById('progress-line').style.width = percentTotal + "%";
+
+            // Render Cards
+            data.forEach(m => {
+                const sisa = TARGET - m.paid;
+                const isLunas = sisa <= 0;
+                const percent = Math.min((m.paid / TARGET) * 100, 100);
+                
+                const html = `
+                <div class="card ${isLunas ? 'lunas' : 'belum'}">
+                    <div class="card-header">
+                        <span class="member-name font-serif">${m.name}</span>
+                        <span class="badge ${isLunas ? 'lunas' : 'belum'}">${isLunas ? 'LUNAS' : 'BELUM'}</span>
+                    </div>
+                    
+                    <div class="progress-mini">
+                        <div class="bar-mini" style="width: ${percent}%"></div>
+                    </div>
+
+                    <div class="card-footer">
+                        <div>
+                            <div class="money-label">SUDAH MASUK</div>
+                            <div class="money-value">${rupiah(m.paid)}</div>
+                        </div>
+                        ${!isLunas ? `
+                        <div style="text-align: right;">
+                            <div class="money-label">KURANG</div>
+                            <div class="money-value money-sisa">${rupiah(sisa)}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        // --- SORTING ---
+        function sortData(type, btn) {
+            // Update button styles
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let sorted = [...members];
+            if (type === 'name') sorted.sort((a,b) => a.name.localeCompare(b.name));
+            if (type === 'paid') sorted.sort((a,b) => b.paid - a.paid);
+            if (type === 'debt') sorted.sort((a,b) => (TARGET - b.paid) - (TARGET - a.paid));
+            
+            render(sorted);
+        }
+
+        // --- INIT ---
+        render(members); // Render default (A-Z)
+
+    </script>
+</body>
+</html>
