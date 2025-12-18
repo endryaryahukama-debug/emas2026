@@ -3,198 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Dashboard Emas 2026</title>
+    <title>Keilmuan Emas 2026</title>
     
-    <!-- Font Online (Fallback otomatis ke sistem jika offline) -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
     <style>
-        /* --- VARIABEL WARNA (TEMA EMAS) --- */
+        /* --- TEMA LUXURY GOLD --- */
         :root {
             --bg-dark: #050505;
-            --bg-card: rgba(20, 20, 20, 0.85);
+            --bg-card: rgba(18, 18, 18, 0.9);
             --gold-primary: #d4af37;
-            --gold-light: #f5dc92;
+            --gold-light: #fceeb5;
             --gold-dim: #8a7228;
-            --text-main: #eadc9f;
-            --text-muted: #888;
-            --success: #4ade80;
-            --warning: #fb923c;
-            --border: rgba(212, 175, 55, 0.2);
-            --wa-green: #25D366; /* Warna Resmi WhatsApp */
+            --text-main: #e2d9bc;
+            --text-muted: #9ca3af;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --border: rgba(212, 175, 55, 0.3);
         }
 
-        /* --- RESET DASAR --- */
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
         
         body {
             background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at top, #1a1500, #000000);
+            background-image: radial-gradient(circle at top, #241c05, #000000);
             color: var(--text-main);
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            padding-bottom: 40px; 
+            font-family: 'Inter', sans-serif;
+            padding-bottom: 50px; 
             min-height: 100vh;
         }
 
-        /* --- TIPOGRAFI --- */
         h1, .font-serif { font-family: 'Cinzel', serif; }
-        .text-xs { font-size: 11px; }
-        .font-bold { font-weight: 700; }
-        .uppercase { text-transform: uppercase; letter-spacing: 1px; }
-
-        /* --- STICKY HEADER (STATS) --- */
+        
+        /* --- HEADER --- */
         .sticky-header {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 50;
+            background: rgba(5, 5, 5, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.8);
         }
-        .stats-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .stat-box .label { color: var(--gold-primary); font-size: 10px; font-weight: 600; letter-spacing: 1px; }
-        .stat-box .value { color: #fff; font-size: 18px; font-weight: bold; text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
-        .progress-line { height: 3px; background: #222; width: 100%; }
-        .progress-fill { height: 100%; background: var(--gold-primary); width: 0%; transition: width 1s ease; box-shadow: 0 0 8px var(--gold-primary); }
+        .stats-container { display: flex; justify-content: space-between; padding: 15px 20px; max-width: 600px; margin: 0 auto; }
+        .stat-box .label { color: var(--gold-primary); font-size: 10px; font-weight: 700; letter-spacing: 1px; }
+        .stat-box .value { color: #fff; font-size: 16px; font-weight: bold; }
+        .progress-line { height: 2px; background: #222; width: 100%; }
+        .progress-fill { height: 100%; background: var(--gold-primary); width: 0%; transition: width 1s ease; box-shadow: 0 0 10px var(--gold-primary); }
 
-        /* --- KONTEN UTAMA --- */
-        .main-content { padding: 20px; max-width: 600px; margin: 0 auto; }
+        /* --- CONTENT --- */
+        .main-content { padding: 30px 20px; max-width: 600px; margin: 0 auto; }
         
-        .header-title { text-align: center; margin-bottom: 25px; }
-        .header-title h1 { color: var(--gold-light); margin-bottom: 5px; text-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
-        .header-title p { color: var(--gold-dim); font-size: 12px; letter-spacing: 2px; }
+        .header-title { text-align: center; margin-bottom: 30px; }
+        .header-title h1 { color: var(--gold-light); font-size: 28px; margin-bottom: 5px; text-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
+        .header-title p { color: var(--gold-dim); font-size: 11px; letter-spacing: 3px; font-weight: 600; text-transform: uppercase; }
 
-        /* --- TOMBOL FILTER --- */
-        .filter-scroll {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-            scrollbar-width: none; 
+        .mahar-badge {
+            display: inline-block; margin-top: 15px; padding: 8px 20px;
+            background: linear-gradient(90deg, rgba(212,175,55,0.1), rgba(212,175,55,0.2), rgba(212,175,55,0.1));
+            border: 1px solid var(--gold-primary); border-radius: 50px;
+            color: var(--gold-light); font-size: 14px; font-weight: 700;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+            font-family: 'Cinzel', serif; letter-spacing: 1px;
         }
+
+        /* --- LIST MEMBER --- */
+        .filter-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; margin-bottom: 20px; scrollbar-width: none; }
         .filter-scroll::-webkit-scrollbar { display: none; }
-        
         .btn-filter {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid var(--gold-dim);
-            color: var(--gold-light);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 11px;
-            white-space: nowrap;
-            transition: all 0.2s;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--gold-light); padding: 8px 16px; border-radius: 8px;
+            font-size: 11px; white-space: nowrap; transition: all 0.2s;
         }
-        .btn-filter.active { background: var(--gold-primary); color: #000; font-weight: bold; border-color: var(--gold-primary); }
+        .btn-filter.active { background: var(--gold-primary); color: #000; font-weight: 700; border-color: var(--gold-primary); }
 
-        /* --- KARTU MEMBER --- */
         .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 12px;
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 16px; margin-bottom: 12px;
+            position: relative; overflow: hidden;
+        }
+        .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
+        .card.lunas::before { background: var(--success); box-shadow: 0 0 10px var(--success); }
+        .card.belum::before { background: var(--warning); }
+        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .member-name { font-weight: 600; color: #fff; font-size: 15px; }
+        .badge { font-size: 9px; padding: 3px 8px; border-radius: 4px; font-weight: 700; }
+        .badge.lunas { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .badge.belum { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .bar-bg { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin: 12px 0; }
+        .bar-fill { height: 100%; border-radius: 2px; }
+        .lunas .bar-fill { background: var(--success); }
+        .belum .bar-fill { background: var(--warning); }
+        .card-footer { display: flex; justify-content: space-between; align-items: flex-end; font-family: monospace; }
+        .money-val { font-size: 13px; color: #fff; font-weight: 500; }
+
+        /* --- THE GOLDEN OFFER SECTION (Updated) --- */
+        .join-section {
+            margin-top: 50px;
+            background: linear-gradient(170deg, #1f1a0b 0%, #080808 100%);
+            border: 1px solid var(--gold-dim);
+            border-radius: 20px;
+            padding: 35px 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
             position: relative;
             overflow: hidden;
-            transition: transform 0.2s;
         }
-        .card:active { transform: scale(0.98); }
-        .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
-        .card.lunas::before { background: var(--success); box-shadow: 0 0 8px var(--success); }
-        .card.belum::before { background: var(--warning); }
-
-        .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .member-name { font-weight: bold; color: #fff; font-size: 15px; }
-        .badge { font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; letter-spacing: 0.5px; }
-        .badge.lunas { background: rgba(74, 222, 128, 0.15); color: var(--success); border: 1px solid rgba(74, 222, 128, 0.3); }
-        .badge.belum { background: rgba(251, 146, 60, 0.15); color: var(--warning); border: 1px solid rgba(251, 146, 60, 0.3); }
-
-        .progress-mini { height: 6px; background: #222; border-radius: 3px; overflow: hidden; margin: 10px 0; }
-        .bar-mini { height: 100%; border-radius: 3px; }
-        .lunas .bar-mini { background: linear-gradient(90deg, #22c55e, #4ade80); }
-        .belum .bar-mini { background: linear-gradient(90deg, #ca8a04, #facc15); }
-
-        .card-footer { display: flex; justify-content: space-between; align-items: flex-end; font-family: monospace; }
-        .money-label { font-size: 10px; color: var(--text-muted); margin-bottom: 2px; }
-        .money-value { font-size: 13px; color: var(--text-main); }
-        .money-sisa { color: var(--warning); }
-
-        /* --- BAGIAN JOIN / KONTAK --- */
-        .join-section {
-            margin-top: 40px;
-            background: linear-gradient(145deg, rgba(20,20,20,0.9), rgba(10,10,5,0.95));
-            border: 1px solid var(--gold-dim);
-            border-radius: 16px;
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .join-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
         }
-        .org-name {
+
+        .org-name { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold-light); font-size: 20px; text-align: center; margin-bottom: 5px; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
+        .mujiz-name { color: var(--gold-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 3px; display: block; text-align: center; margin-bottom: 30px; }
+
+        /* KOTAK MANFAAT SPESIAL */
+        .benefit-box {
+            border-left: 2px solid var(--gold-primary);
+            background: linear-gradient(90deg, rgba(212,175,55,0.05), transparent);
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+        .benefit-title {
+            color: var(--gold-light);
             font-family: 'Cinzel', serif;
             font-weight: 700;
-            color: var(--gold-light);
-            font-size: 16px;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-        .mujiz-name {
-            color: var(--gold-dim);
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid var(--border);
-            display: inline-block;
-            padding-bottom: 5px;
-        }
-        .btn-wa {
-            display: block;
-            width: 100%;
-            background: linear-gradient(45deg, #128c7e, #25d366);
-            color: #fff;
-            text-decoration: none;
-            padding: 14px;
-            border-radius: 50px;
-            font-weight: bold;
             font-size: 14px;
+            margin-bottom: 5px;
             letter-spacing: 0.5px;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid rgba(255,255,255,0.2);
         }
-        .btn-wa:active { transform: scale(0.96); box-shadow: 0 2px 8px rgba(37, 211, 102, 0.2); }
-        .wa-icon {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            vertical-align: middle;
-            margin-right: 8px;
-            fill: currentColor;
+        .benefit-desc {
+            color: #d1d5db;
+            font-size: 13px;
+            line-height: 1.6;
+            font-weight: 300;
         }
+        .highlight { color: #fff; font-weight: 600; }
 
-        /* --- FOOTER QUOTE --- */
-        .footer-quote {
-            text-align: center; 
-            margin-top: 30px; 
-            color: var(--gold-dim); 
-            font-size: 11px; 
-            opacity: 0.6;
+        /* TOMBOL WA */
+        .btn-wa {
+            display: flex; justify-content: center; align-items: center; width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #fff; text-decoration: none; padding: 18px; border-radius: 12px;
+            font-weight: 700; font-size: 14px; letter-spacing: 1px;
+            box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
+            border: 1px solid rgba(255,255,255,0.1); margin-top: 30px;
+            transition: transform 0.2s;
         }
+        .btn-wa:active { transform: scale(0.97); }
+
+        .footer-quote { text-align: center; margin-top: 40px; color: var(--gold-dim); font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
 
     </style>
 </head>
 <body>
 
-    <!-- Sticky Stats -->
     <div class="sticky-header">
         <div class="stats-container">
             <div class="stat-box">
@@ -216,33 +177,49 @@
         <div class="header-title">
             <h1>KEILMUAN EMAS</h1>
             <p>DATA MONITORING 2026</p>
+            <div class="mahar-badge">MAHAR: RP 1.100.000</div>
         </div>
 
-        <!-- Filter Buttons -->
         <div class="filter-scroll">
             <button class="btn-filter active" onclick="sortData('name', this)">Abjad A-Z</button>
             <button class="btn-filter" onclick="sortData('paid', this)">Terbanyak Bayar</button>
             <button class="btn-filter" onclick="sortData('debt', this)">Sisa Terbanyak</button>
         </div>
 
-        <!-- List Container -->
-        <div id="list-container">
-            <!-- Data akan masuk di sini via JS -->
-        </div>
+        <div id="list-container"></div>
 
-        <!-- Section Informasi & Pendaftaran -->
+        <!-- SECTION: MANFAAT PROGRAM (COPYWRITING TINGKAT TINGGI) -->
         <div class="join-section">
             <div class="org-name">CAKRA BUANA AL-HIKMAH</div>
             <div class="mujiz-name">Mujiz: Endry Arya</div>
             
-            <p style="font-size: 12px; margin-bottom: 15px; color: #ccc; line-height: 1.5;">
-                Ingin bergabung dalam energi keilmuan ini?<br>Klik tombol di bawah untuk terhubung.
-            </p>
+            <!-- Benefit 1: Transformasi Nasib -->
+            <div class="benefit-box">
+                <div class="benefit-title">✦ TRANSFORMASI 2026</div>
+                <div class="benefit-desc">
+                    Mendesain ulang garis nasib Anda di tahun 2026. Bukan sekadar bertahan, tapi melakukan <span class="highlight">lompatan drastis</span> menuju kesejahteraan mutlak, kemakmuran tanpa batas, dan memutus rantai kekurangan selamanya.
+                </div>
+            </div>
 
-            <!-- Tombol Direct WhatsApp -->
-            <a href="https://wa.me/6285173262649?text=Assalamualaikum%20Mujiz%20Endry%20Arya,%20saya%20tertarik%20untuk%20bergabung%20dengan%20Program%20Keilmuan%20Emas%202026." target="_blank" class="btn-wa">
-                <svg class="wa-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-                Hubungi via WhatsApp
+            <!-- Benefit 2: Eksklusivitas Keilmuan -->
+            <div class="benefit-box">
+                <div class="benefit-title">✦ BLUEPRINT RAHASIA (PRIVAT)</div>
+                <div class="benefit-desc">
+                    Materi ini <strong>tidak untuk umum</strong>. Anda akan menerima kunci pembuka "Hijab Rezeki" yang saya wariskan secara privat. Sebuah metode kuno yang terbukti ilmiah untuk menarik kekayaan dari segala penjuru mata angin.
+                </div>
+            </div>
+
+            <!-- Benefit 3: Dedikasi Waktu -->
+            <div class="benefit-box">
+                <div class="benefit-title">✦ WAKTU KHUSUS SANG MUJIZ</div>
+                <div class="benefit-desc">
+                    Saya tidak memberikan sisa waktu, melainkan <span class="highlight">mendedikasikan waktu terbaik</span> untuk membimbing batin Anda. Kita akan bedah, hari apa dan jam berapa energi Anda berada di puncak untuk menarik hajat besar.
+                </div>
+            </div>
+
+            <a href="https://wa.me/6285173262649?text=Assalamualaikum%20Mujiz%20Endry%20Arya,%20saya%20siap%20menjemput%20perubahan%20nasib%20di%20Program%20Keilmuan%20Emas%202026.%20Mohon%20bimbingannya." target="_blank" class="btn-wa">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right:10px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></path></svg>
+                AMBIL KUOTA SAYA SEKARANG
             </a>
         </div>
 
@@ -253,7 +230,6 @@
     </div>
 
     <script>
-        // --- DATA ---
         const TARGET = 1100000;
         const members = [
             { id: 1, name: "Ridwan Hanif", paid: 700000 },
@@ -278,15 +254,12 @@
             { id: 20, name: "Fikri Alamsyah", paid: 450000 },
         ];
 
-        // --- FORMAT RUPIAH ---
         const rupiah = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(n);
 
-        // --- RENDER LOGIC ---
         function render(data) {
             const container = document.getElementById('list-container');
             container.innerHTML = '';
-
-            // Update Header Stats
+            
             const total = members.reduce((a, b) => a + b.paid, 0);
             const totalTarget = members.length * TARGET;
             const percentTotal = (total / totalTarget) * 100;
@@ -295,7 +268,6 @@
             document.getElementById('persen-total').innerText = percentTotal.toFixed(1) + "%";
             document.getElementById('progress-line').style.width = percentTotal + "%";
 
-            // Render Cards
             data.forEach(m => {
                 const sisa = TARGET - m.paid;
                 const isLunas = sisa <= 0;
@@ -307,46 +279,30 @@
                         <span class="member-name font-serif">${m.name}</span>
                         <span class="badge ${isLunas ? 'lunas' : 'belum'}">${isLunas ? 'LUNAS' : 'BELUM'}</span>
                     </div>
-                    
-                    <div class="progress-mini">
-                        <div class="bar-mini" style="width: ${percent}%"></div>
-                    </div>
-
+                    <div class="bar-bg"><div class="bar-fill" style="width: ${percent}%"></div></div>
                     <div class="card-footer">
                         <div>
-                            <div class="money-label">SUDAH MASUK</div>
-                            <div class="money-value">${rupiah(m.paid)}</div>
+                            <div style="font-size:10px; color:#9ca3af; margin-bottom:2px">SUDAH MASUK</div>
+                            <div class="money-val">${rupiah(m.paid)}</div>
                         </div>
-                        ${!isLunas ? `
-                        <div style="text-align: right;">
-                            <div class="money-label">KURANG</div>
-                            <div class="money-value money-sisa">${rupiah(sisa)}</div>
-                        </div>
-                        ` : ''}
+                        ${!isLunas ? `<div style="text-align: right;"><div style="font-size:10px; color:#9ca3af; margin-bottom:2px">KURANG</div><div class="money-val" style="color:#fb923c">${rupiah(sisa)}</div></div>` : ''}
                     </div>
-                </div>
-                `;
+                </div>`;
                 container.innerHTML += html;
             });
         }
 
-        // --- SORTING ---
         function sortData(type, btn) {
-            // Update button styles
             document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-
             let sorted = [...members];
             if (type === 'name') sorted.sort((a,b) => a.name.localeCompare(b.name));
             if (type === 'paid') sorted.sort((a,b) => b.paid - a.paid);
             if (type === 'debt') sorted.sort((a,b) => (TARGET - b.paid) - (TARGET - a.paid));
-            
             render(sorted);
         }
 
-        // --- INIT ---
-        render(members); 
-
+        render(members);
     </script>
 </body>
 </html>
