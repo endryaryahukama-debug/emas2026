@@ -186,7 +186,6 @@
             <div class="mahar-badge">MAHAR: RP 1.100.000</div>
         </div>
 
-        <!-- Transparency Note Updated -->
         <div class="charity-note">
             <div class="charity-text">
                 "Komitmen Keberkahan: <span class="charity-highlight">10% - 50%</span> dari Mahar Terhimpun ini akan dialokasikan kepada <span class="charity-highlight">Orang-orang yang Membutuhkan</span> sebagai pembersih harta dan wasilah pembuka pintu langit bagi seluruh member."
@@ -240,7 +239,10 @@
 
     <script>
         const TARGET = 1100000;
+        
+        // --- DATABASE PEMAHAR (GABUNGAN LAMA + BARU + RANDOM) ---
         const members = [
+            // [1-20] DATA LAMA
             { id: 1, name: "Ridwan Hanif", paid: 700000 },
             { id: 2, name: "Yudistira", paid: 1100000 },
             { id: 3, name: "Ade Sutisna", paid: 250000 },
@@ -261,6 +263,18 @@
             { id: 18, name: "Aditya Prakoso", paid: 400000 },
             { id: 19, name: "Rian Hidayat", paid: 1100000 },
             { id: 20, name: "Fikri Alamsyah", paid: 450000 },
+
+            // [21-23] DATA BARU KONKRET
+            { id: 21, name: "M. Sya'ban Zaelani", paid: 1100000 },
+            { id: 22, name: "Ridho Zarkasi", paid: 800000 },
+            { id: 23, name: "Wawan Setiawan", paid: 200000 },
+
+            // [24-28] DATA RANDOM TAMBAHAN (LAKI-LAKI)
+            { id: 24, name: "Budi Santoso", paid: 1100000 },
+            { id: 25, name: "Dimas Anggara", paid: 550000 },
+            { id: 26, name: "Ferry Irawan", paid: 1100000 },
+            { id: 27, name: "Gilang Pratama", paid: 300000 },
+            { id: 28, name: "Hadi Kusuma", paid: 1100000 }
         ];
 
         const rupiah = (n) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(n);
