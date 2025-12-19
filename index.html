@@ -240,9 +240,18 @@
     <script>
         const TARGET = 1100000;
         
-        // --- DATABASE PEMAHAR (GABUNGAN LAMA + BARU + RANDOM) ---
+        // --- DATABASE PEMAHAR (UPDATED V7) ---
         const members = [
-            // [1-20] DATA LAMA
+            // [0-1] DATA TERBARU (Sesuai Request: Tampil di Depan)
+            { id: 29, name: "dr. Jayadi", paid: 250000 },
+            { id: 30, name: "H. Bambang Susilo", paid: 1100000 }, // Random Lunas
+
+            // [2-4] DATA BARU SEBELUMNYA (Tampil setelah yang terbaru)
+            { id: 21, name: "M. Sya'ban Zaelani", paid: 1100000 },
+            { id: 22, name: "Ridho Zarkasi", paid: 800000 },
+            { id: 23, name: "Wawan Setiawan", paid: 200000 },
+
+            // [5-24] DATA LAMA
             { id: 1, name: "Ridwan Hanif", paid: 700000 },
             { id: 2, name: "Yudistira", paid: 1100000 },
             { id: 3, name: "Ade Sutisna", paid: 250000 },
@@ -264,12 +273,7 @@
             { id: 19, name: "Rian Hidayat", paid: 1100000 },
             { id: 20, name: "Fikri Alamsyah", paid: 450000 },
 
-            // [21-23] DATA BARU KONKRET
-            { id: 21, name: "M. Sya'ban Zaelani", paid: 1100000 },
-            { id: 22, name: "Ridho Zarkasi", paid: 800000 },
-            { id: 23, name: "Wawan Setiawan", paid: 200000 },
-
-            // [24-28] DATA RANDOM TAMBAHAN (LAKI-LAKI)
+            // [25-29] DATA RANDOM TAMBAHAN (LAKI-LAKI)
             { id: 24, name: "Budi Santoso", paid: 1100000 },
             { id: 25, name: "Dimas Anggara", paid: 550000 },
             { id: 26, name: "Ferry Irawan", paid: 1100000 },
