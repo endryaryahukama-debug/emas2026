@@ -99,6 +99,7 @@
             background: var(--bg-card); border: 1px solid var(--border);
             border-radius: 12px; padding: 16px; margin-bottom: 12px;
             position: relative; overflow: hidden;
+            transition: transform 0.3s;
         }
         .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
         .card.lunas::before { background: var(--success); box-shadow: 0 0 10px var(--success); }
@@ -193,9 +194,9 @@
         </div>
 
         <div class="filter-scroll">
-            <button class="btn-filter active" onclick="sortData('name', this)">Abjad A-Z</button>
+            <button class="btn-filter active" onclick="sortData('default', this)">Prioritas (Belum Lunas)</button>
+            <button class="btn-filter" onclick="sortData('name', this)">Abjad A-Z</button>
             <button class="btn-filter" onclick="sortData('paid', this)">Terbanyak Bayar</button>
-            <button class="btn-filter" onclick="sortData('debt', this)">Sisa Terbanyak</button>
         </div>
 
         <div id="list-container"></div>
@@ -240,44 +241,42 @@
     <script>
         const TARGET = 1100000;
         
-        // --- DATABASE PEMAHAR (UPDATED V7) ---
+        // DATABASE UPDATE REVISI
+        // Konsep: Belum Lunas (Debt) akan otomatis di-sortir ke paling atas saat render
         const members = [
-            // [0-1] DATA TERBARU (Sesuai Request: Tampil di Depan)
-            { id: 29, name: "dr. Jayadi", paid: 250000 },
-            { id: 30, name: "H. Bambang Susilo", paid: 1100000 }, // Random Lunas
+            // DATA BELUM LUNAS (PRIORITAS TAMPILAN)
+            { id: 31, name: "Achmad Faishol", paid: 50000 },
+            { id: 3, name: "Ade Sutisna", paid: 450000 },
+            { id: 29, name: "dr. Jayadi", paid: 250000 }, // Revisi: Kembali ke 250k
 
-            // [2-4] DATA BARU SEBELUMNYA (Tampil setelah yang terbaru)
+            // DATA SUDAH LUNAS
+            { id: 30, name: "H. Bambang Susilo", paid: 1100000 },
             { id: 21, name: "M. Sya'ban Zaelani", paid: 1100000 },
-            { id: 22, name: "Ridho Zarkasi", paid: 800000 },
-            { id: 23, name: "Wawan Setiawan", paid: 200000 },
-
-            // [5-24] DATA LAMA
-            { id: 1, name: "Ridwan Hanif", paid: 700000 },
+            { id: 22, name: "Ridho Zarkasi", paid: 1100000 }, 
+            { id: 23, name: "Wawan Setiawan", paid: 1100000 },
+            { id: 1, name: "Ridwan Hanif", paid: 1100000 },
             { id: 2, name: "Yudistira", paid: 1100000 },
-            { id: 3, name: "Ade Sutisna", paid: 250000 },
             { id: 4, name: "Ahmad Fauzan", paid: 1100000 },
-            { id: 5, name: "Rizky Maulana", paid: 400000 },
-            { id: 6, name: "Deni Firmansyah", paid: 600000 },
+            { id: 5, name: "Rizky Maulana", paid: 1100000 },
+            { id: 6, name: "Deni Firmansyah", paid: 1100000 },
             { id: 7, name: "Agus Salim", paid: 1100000 },
-            { id: 8, name: "Fajar Nugraha", paid: 450000 },
+            { id: 8, name: "Fajar Nugraha", paid: 1100000 },
             { id: 9, name: "Ilham Pratama", paid: 1100000 },
-            { id: 10, name: "Bayu Setiawan", paid: 600000 },
+            { id: 10, name: "Bayu Setiawan", paid: 1100000 },
             { id: 11, name: "Rendi Kurniawan", paid: 1100000 },
-            { id: 12, name: "Arif Rahman", paid: 400000 },
+            { id: 12, name: "Arif Rahman", paid: 1100000 },
             { id: 13, name: "Hendra Wijaya", paid: 1100000 },
-            { id: 14, name: "Dimas Saputra", paid: 450000 },
+            { id: 14, name: "Dimas Saputra", paid: 1100000 },
             { id: 15, name: "Rafi Akbar", paid: 1100000 },
-            { id: 16, name: "Yoga Permana", paid: 600000 },
+            { id: 16, name: "Yoga Permana", paid: 1100000 },
             { id: 17, name: "Bagus Santoso", paid: 1100000 },
-            { id: 18, name: "Aditya Prakoso", paid: 400000 },
+            { id: 18, name: "Aditya Prakoso", paid: 1100000 },
             { id: 19, name: "Rian Hidayat", paid: 1100000 },
-            { id: 20, name: "Fikri Alamsyah", paid: 450000 },
-
-            // [25-29] DATA RANDOM TAMBAHAN (LAKI-LAKI)
+            { id: 20, name: "Fikri Alamsyah", paid: 1100000 },
             { id: 24, name: "Budi Santoso", paid: 1100000 },
-            { id: 25, name: "Dimas Anggara", paid: 550000 },
+            { id: 25, name: "Dimas Anggara", paid: 1100000 },
             { id: 26, name: "Ferry Irawan", paid: 1100000 },
-            { id: 27, name: "Gilang Pratama", paid: 300000 },
+            { id: 27, name: "Gilang Pratama", paid: 1100000 },
             { id: 28, name: "Hadi Kusuma", paid: 1100000 }
         ];
 
@@ -323,13 +322,31 @@
             document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             let sorted = [...members];
-            if (type === 'name') sorted.sort((a,b) => a.name.localeCompare(b.name));
-            if (type === 'paid') sorted.sort((a,b) => b.paid - a.paid);
-            if (type === 'debt') sorted.sort((a,b) => (TARGET - b.paid) - (TARGET - a.paid));
+            
+            if (type === 'default') {
+                // Logic Prioritas: Yang punya utang (sisa > 0) ditaruh paling atas
+                sorted.sort((a, b) => {
+                    const sisaA = TARGET - a.paid;
+                    const sisaB = TARGET - b.paid;
+                    // Jika A belum lunas dan B lunas, A naik (-1)
+                    if (sisaA > 0 && sisaB <= 0) return -1;
+                    // Jika B belum lunas dan A lunas, B naik (1)
+                    if (sisaB > 0 && sisaA <= 0) return 1;
+                    // Jika sama statusnya, urutkan berdasarkan ID (terbaru di atas untuk sesama group)
+                    return b.id - a.id;
+                });
+            } else if (type === 'name') {
+                sorted.sort((a,b) => a.name.localeCompare(b.name));
+            } else if (type === 'paid') {
+                sorted.sort((a,b) => b.paid - a.paid);
+            } else if (type === 'debt') {
+                sorted.sort((a,b) => (TARGET - b.paid) - (TARGET - a.paid));
+            }
             render(sorted);
         }
 
-        render(members);
+        // Init: Default sort (Belum Lunas di atas)
+        sortData('default', document.querySelector('.btn-filter')); 
     </script>
 </body>
 </html>
