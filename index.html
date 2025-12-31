@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Keilmuan Emas 2026</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         /* --- TEMA LUXURY GOLD --- */
@@ -26,14 +26,39 @@
         
         body {
             background-color: var(--bg-dark);
-            background-image: radial-gradient(circle at top, #241c05, #000000);
+            background-image: radial-gradient(circle at top, #1a1200, #000000);
             color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            padding-bottom: 50px; 
+            padding-bottom: 90px;
             min-height: 100vh;
         }
 
         h1, .font-serif { font-family: 'Cinzel', serif; }
+
+        /* --- BRAND HEADER --- */
+        .brand-header {
+            text-align: center;
+            padding: 25px 10px 15px 10px;
+            background: rgba(0,0,0,0.8);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .mystic-brand {
+            font-family: 'Cinzel', serif;
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #8a6e28 0%, #d4af37 20%, #fff8dc 45%, #ffd700 50%, #fff8dc 55%, #d4af37 80%, #8a6e28 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine-flow 4s linear infinite, float-breathing 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+        }
+
+        @keyframes shine-flow { to { background-position: 200% center; } }
+        @keyframes float-breathing { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2px); } }
         
         /* --- STICKY HEADER --- */
         .sticky-header {
@@ -45,47 +70,33 @@
             box-shadow: 0 5px 30px rgba(0,0,0,0.8);
         }
         .stats-container { display: flex; justify-content: space-between; padding: 15px 20px; max-width: 600px; margin: 0 auto; }
-        
         .stat-box .label { color: var(--gold-primary); font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
         .stat-box .value { color: #fff; font-size: 16px; font-weight: bold; }
-        
         .progress-line { height: 2px; background: #222; width: 100%; }
         .progress-fill { height: 100%; background: var(--gold-primary); width: 0%; transition: width 1s ease; box-shadow: 0 0 10px var(--gold-primary); }
 
         /* --- CONTENT --- */
         .main-content { padding: 30px 20px; max-width: 600px; margin: 0 auto; }
-        
         .header-title { text-align: center; margin-bottom: 20px; }
         .header-title h1 { color: var(--gold-light); font-size: 28px; margin-bottom: 5px; text-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
         .header-title p { color: var(--gold-dim); font-size: 11px; letter-spacing: 3px; font-weight: 600; text-transform: uppercase; }
-
         .mahar-badge {
             display: inline-block; margin-top: 15px; padding: 8px 20px;
             background: linear-gradient(90deg, rgba(212,175,55,0.1), rgba(212,175,55,0.2), rgba(212,175,55,0.1));
             border: 1px solid var(--gold-primary); border-radius: 50px;
             color: var(--gold-light); font-size: 14px; font-weight: 700;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
-            font-family: 'Cinzel', serif; letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); font-family: 'Cinzel', serif; letter-spacing: 1px;
         }
 
-        /* --- TRANSPARENCY NOTE --- */
+        /* --- NOTE --- */
         .charity-note {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px dashed var(--gold-dim);
-            border-radius: 8px;
-            padding: 10px 15px;
-            margin-bottom: 30px;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--gold-dim); border-radius: 8px;
+            padding: 10px 15px; margin-bottom: 30px; text-align: center;
         }
-        .charity-text {
-            font-size: 11px;
-            color: #d1d5db;
-            line-height: 1.5;
-            font-style: italic;
-        }
+        .charity-text { font-size: 11px; color: #d1d5db; line-height: 1.5; font-style: italic; }
         .charity-highlight { color: var(--gold-light); font-weight: 600; }
 
-        /* --- LIST MEMBER --- */
+        /* --- LIST & CARDS --- */
         .filter-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 5px; margin-bottom: 20px; scrollbar-width: none; }
         .filter-scroll::-webkit-scrollbar { display: none; }
         .btn-filter {
@@ -96,72 +107,118 @@
         .btn-filter.active { background: var(--gold-primary); color: #000; font-weight: 700; border-color: var(--gold-primary); }
 
         .card {
-            background: var(--bg-card); border: 1px solid var(--border);
-            border-radius: 12px; padding: 16px; margin-bottom: 12px;
-            position: relative; overflow: hidden;
-            transition: transform 0.3s;
+            background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px;
+            padding: 16px; margin-bottom: 12px; position: relative; overflow: hidden; transition: transform 0.3s;
         }
         .card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; }
         .card.lunas::before { background: var(--success); box-shadow: 0 0 10px var(--success); }
         .card.belum::before { background: var(--warning); }
-        
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
         .member-name { font-weight: 600; color: #fff; font-size: 15px; }
         .badge { font-size: 9px; padding: 3px 8px; border-radius: 4px; font-weight: 700; }
         .badge.lunas { background: rgba(16, 185, 129, 0.15); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.3); }
         .badge.belum { background: rgba(245, 158, 11, 0.15); color: var(--warning); border: 1px solid rgba(245, 158, 11, 0.3); }
-        
         .bar-bg { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; margin: 12px 0; }
         .bar-fill { height: 100%; border-radius: 2px; }
         .lunas .bar-fill { background: var(--success); }
         .belum .bar-fill { background: var(--warning); }
-        
         .card-footer { display: flex; justify-content: space-between; align-items: flex-end; font-family: monospace; }
         .money-val { font-size: 13px; color: #fff; font-weight: 500; }
 
-        /* --- THE GOLDEN OFFER SECTION --- */
+        /* --- JOIN SECTION --- */
         .join-section {
-            margin-top: 50px;
-            background: linear-gradient(170deg, #1f1a0b 0%, #080808 100%);
-            border: 1px solid var(--gold-dim);
-            border-radius: 20px;
-            padding: 35px 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-            position: relative; overflow: hidden;
+            margin-top: 50px; background: linear-gradient(170deg, #1f1a0b 0%, #080808 100%);
+            border: 1px solid var(--gold-dim); border-radius: 20px; padding: 35px 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.7); position: relative; overflow: hidden;
         }
-        .join-section::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-        }
-
         .org-name { font-family: 'Cinzel', serif; font-weight: 700; color: var(--gold-light); font-size: 20px; text-align: center; margin-bottom: 5px; text-shadow: 0 0 10px rgba(212,175,55,0.3); }
         .mujiz-name { color: var(--gold-dim); font-size: 11px; text-transform: uppercase; letter-spacing: 3px; display: block; text-align: center; margin-bottom: 30px; }
-
         .benefit-box {
-            border-left: 2px solid var(--gold-primary);
-            background: linear-gradient(90deg, rgba(212,175,55,0.05), transparent);
+            border-left: 2px solid var(--gold-primary); background: linear-gradient(90deg, rgba(212,175,55,0.05), transparent);
             padding: 15px 20px; margin-bottom: 20px;
         }
         .benefit-title { color: var(--gold-light); font-family: 'Cinzel', serif; font-weight: 700; font-size: 14px; margin-bottom: 5px; letter-spacing: 0.5px; }
         .benefit-desc { color: #d1d5db; font-size: 13px; line-height: 1.6; font-weight: 300; }
         .highlight { color: #fff; font-weight: 600; }
-
+        
         .btn-wa {
             display: flex; justify-content: center; align-items: center; width: 100%;
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: #fff; text-decoration: none; padding: 18px; border-radius: 12px;
             font-weight: 700; font-size: 14px; letter-spacing: 1px;
             box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
-            border: 1px solid rgba(255,255,255,0.1); margin-top: 30px;
-            transition: transform 0.2s;
+            border: 1px solid rgba(255,255,255,0.1); margin-top: 30px; transition: transform 0.2s;
         }
         .btn-wa:active { transform: scale(0.97); }
 
         .footer-quote { text-align: center; margin-top: 40px; color: var(--gold-dim); font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
 
+        /* --- TOMBOL FALAQYAH DIGITAL (COMPACT & ELEGANT) --- */
+        .bubble-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: block;
+            height: 32px; /* Dibuat lebih ramping (Compact) */
+            padding: 0 16px; /* Padding sisi diperkecil */
+            border-radius: 50px;
+            text-decoration: none;
+            overflow: hidden; 
+            
+            /* Gradient Aurora Mystic */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #d4af37);
+            background-size: 400% 400%;
+            
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 9px; /* Ukuran font diperkecil agar elegan */
+            letter-spacing: 1px;
+            
+            box-shadow: 0 0 15px rgba(35, 213, 171, 0.5), inset 0 0 10px rgba(255,255,255,0.3);
+            animation: aurora-flow 8s ease infinite;
+            border: 1px solid rgba(255,255,255,0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .swap-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            animation: text-slide 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        .swap-item {
+            height: 32px; /* Sesuaikan dengan tinggi bubble */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+        }
+
+        /* Animasi Slide Teks (Disesuaikan dengan tinggi 32px) */
+        @keyframes text-slide {
+            0%, 45% { transform: translateY(0); } 
+            50%, 95% { transform: translateY(-32px); } 
+            100% { transform: translateY(0); }
+        }
+
+        @keyframes aurora-flow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bubble-float:active { transform: scale(0.95); }
+
     </style>
 </head>
 <body>
+
+    <div class="brand-header">
+        <div class="mystic-brand">CAKRA BUANA<br>AL-HIKMAH</div>
+    </div>
 
     <div class="sticky-header">
         <div class="stats-container">
@@ -202,7 +259,7 @@
         <div id="list-container"></div>
 
         <div class="join-section">
-            <div class="org-name">CAKRA BUANA AL-HIKMAH</div>
+            <div class="org-name" style="font-size: 16px;">PENDAFTARAN RESMI</div>
             <div class="mujiz-name">Mujiz: Endry Arya</div>
             
             <div class="benefit-box">
@@ -238,18 +295,25 @@
 
     </div>
 
+    <!-- TOMBOL FALAQYAH DIGITAL (COMPACT & SWAP) -->
+    <a href="https://bit.ly/CakraBuanaAl-Hikmah" target="_blank" class="bubble-float">
+        <div class="swap-container">
+            <div class="swap-item">FALAQYAH DIGITAL</div>
+            <div class="swap-item">WEBSITE LAIN</div>
+        </div>
+    </a>
+
     <script>
         const TARGET = 1100000;
         
-        // DATABASE UPDATE REVISI
-        // Konsep: Belum Lunas (Debt) akan otomatis di-sortir ke paling atas saat render
+        // --- DATABASE PEMAHAR ---
         const members = [
-            // DATA BELUM LUNAS (PRIORITAS TAMPILAN)
-            { id: 31, name: "Achmad Faishol", paid: 50000 },
+            // BELUM LUNAS
+            { id: 31, name: "Achmad Faisol", paid: 50000 },
             { id: 3, name: "Ade Sutisna", paid: 450000 },
-            { id: 29, name: "dr. Jayadi", paid: 250000 }, // Revisi: Kembali ke 250k
+            { id: 29, name: "dr. Jayadi", paid: 250000 },
 
-            // DATA SUDAH LUNAS
+            // LUNAS
             { id: 30, name: "H. Bambang Susilo", paid: 1100000 },
             { id: 21, name: "M. Sya'ban Zaelani", paid: 1100000 },
             { id: 22, name: "Ridho Zarkasi", paid: 1100000 }, 
@@ -324,28 +388,21 @@
             let sorted = [...members];
             
             if (type === 'default') {
-                // Logic Prioritas: Yang punya utang (sisa > 0) ditaruh paling atas
                 sorted.sort((a, b) => {
                     const sisaA = TARGET - a.paid;
                     const sisaB = TARGET - b.paid;
-                    // Jika A belum lunas dan B lunas, A naik (-1)
                     if (sisaA > 0 && sisaB <= 0) return -1;
-                    // Jika B belum lunas dan A lunas, B naik (1)
                     if (sisaB > 0 && sisaA <= 0) return 1;
-                    // Jika sama statusnya, urutkan berdasarkan ID (terbaru di atas untuk sesama group)
                     return b.id - a.id;
                 });
             } else if (type === 'name') {
                 sorted.sort((a,b) => a.name.localeCompare(b.name));
             } else if (type === 'paid') {
                 sorted.sort((a,b) => b.paid - a.paid);
-            } else if (type === 'debt') {
-                sorted.sort((a,b) => (TARGET - b.paid) - (TARGET - a.paid));
             }
             render(sorted);
         }
 
-        // Init: Default sort (Belum Lunas di atas)
         sortData('default', document.querySelector('.btn-filter')); 
     </script>
 </body>
