@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Keilmuan Emas 2026</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* --- TEMA LUXURY GOLD --- */
@@ -19,6 +19,7 @@
             --text-muted: #9ca3af;
             --success: #10b981;
             --warning: #f59e0b;
+            --danger: #ff4d4d; /* Merah Mencolok */
             --border: rgba(212, 175, 55, 0.3);
         }
 
@@ -38,8 +39,8 @@
         /* --- BRAND HEADER --- */
         .brand-header {
             text-align: center;
-            padding: 25px 10px 15px 10px;
-            background: rgba(0,0,0,0.8);
+            padding: 25px 15px 20px 15px;
+            background: rgba(0,0,0,0.85);
             border-bottom: 1px solid rgba(212, 175, 55, 0.1);
         }
 
@@ -55,6 +56,25 @@
             -webkit-text-fill-color: transparent;
             animation: shine-flow 4s linear infinite, float-breathing 3s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4));
+            margin-bottom: 12px;
+        }
+
+        /* --- WARNING TEXT (NEW) --- */
+        .warning-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--danger);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 15px rgba(255, 77, 77, 0.6); /* Efek Glow Merah */
+            max-width: 600px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 77, 77, 0.2);
+            border-bottom: 1px solid rgba(255, 77, 77, 0.2);
+            padding: 8px 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 77, 77, 0.05), transparent);
         }
 
         @keyframes shine-flow { to { background-position: 200% center; } }
@@ -80,15 +100,33 @@
         .header-title { text-align: center; margin-bottom: 20px; }
         .header-title h1 { color: var(--gold-light); font-size: 28px; margin-bottom: 5px; text-shadow: 0 0 25px rgba(212, 175, 55, 0.4); }
         .header-title p { color: var(--gold-dim); font-size: 11px; letter-spacing: 3px; font-weight: 600; text-transform: uppercase; }
+        
         .mahar-badge {
-            display: inline-block; margin-top: 15px; padding: 8px 20px;
-            background: linear-gradient(90deg, rgba(212,175,55,0.1), rgba(212,175,55,0.2), rgba(212,175,55,0.1));
-            border: 1px solid var(--gold-primary); border-radius: 50px;
-            color: var(--gold-light); font-size: 14px; font-weight: 700;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15); font-family: 'Cinzel', serif; letter-spacing: 1px;
+            display: inline-block; margin-top: 15px; padding: 8px 25px;
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.25), rgba(16, 185, 129, 0.1));
+            border: 1px solid #10b981; border-radius: 50px;
+            color: #4ade80; font-size: 14px; font-weight: 800;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.2); font-family: 'Cinzel', serif; letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(16, 185, 129, 0.5);
         }
 
-        /* --- NOTE --- */
+        /* --- MARQUEE --- */
+        .marquee-container {
+            margin: 25px auto 10px auto; width: 100%; overflow: hidden; position: relative;
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.05), transparent);
+            border-top: 1px solid rgba(212,175,55,0.1); border-bottom: 1px solid rgba(212,175,55,0.1); padding: 8px 0;
+        }
+        .marquee-text {
+            display: inline-block; white-space: nowrap; padding-left: 100%;
+            font-family: 'Cinzel', serif; font-size: 14px; font-weight: 700; letter-spacing: 1.5px;
+            background: linear-gradient(90deg, #d4af37, #ef4444, #10b981, #3b82f6, #d4af37);
+            background-size: 300% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: scroll-text 15s linear infinite, hue-rotate 4s linear infinite;
+        }
+        @keyframes scroll-text { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        @keyframes hue-rotate { 0% { background-position: 0% 50%; } 100% { background-position: 100% 50%; } }
+
+        /* --- CHARITY NOTE --- */
         .charity-note {
             background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--gold-dim); border-radius: 8px;
             padding: 10px 15px; margin-bottom: 30px; text-align: center;
@@ -153,63 +191,20 @@
 
         .footer-quote { text-align: center; margin-top: 40px; color: var(--gold-dim); font-size: 10px; opacity: 0.5; letter-spacing: 1px; }
 
-        /* --- TOMBOL FALAQYAH DIGITAL (COMPACT & ELEGANT) --- */
+        /* --- BUBBLE BUTTON --- */
         .bubble-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: block;
-            height: 32px; /* Dibuat lebih ramping (Compact) */
-            padding: 0 16px; /* Padding sisi diperkecil */
-            border-radius: 50px;
-            text-decoration: none;
-            overflow: hidden; 
-            
-            /* Gradient Aurora Mystic */
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000; display: block;
+            height: 32px; padding: 0 16px; border-radius: 50px; text-decoration: none; overflow: hidden; 
             background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #d4af37);
-            background-size: 400% 400%;
-            
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 9px; /* Ukuran font diperkecil agar elegan */
-            letter-spacing: 1px;
-            
+            background-size: 400% 400%; color: #fff; font-family: 'Inter', sans-serif; font-weight: 700;
+            font-size: 9px; letter-spacing: 1px;
             box-shadow: 0 0 15px rgba(35, 213, 171, 0.5), inset 0 0 10px rgba(255,255,255,0.3);
-            animation: aurora-flow 8s ease infinite;
-            border: 1px solid rgba(255,255,255,0.4);
-            backdrop-filter: blur(5px);
+            animation: aurora-flow 8s ease infinite; border: 1px solid rgba(255,255,255,0.4); backdrop-filter: blur(5px);
         }
-
-        .swap-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-            animation: text-slide 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-        }
-
-        .swap-item {
-            height: 32px; /* Sesuaikan dengan tinggi bubble */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            white-space: nowrap;
-        }
-
-        /* Animasi Slide Teks (Disesuaikan dengan tinggi 32px) */
-        @keyframes text-slide {
-            0%, 45% { transform: translateY(0); } 
-            50%, 95% { transform: translateY(-32px); } 
-            100% { transform: translateY(0); }
-        }
-
-        @keyframes aurora-flow {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
+        .swap-container { display: flex; flex-direction: column; height: 100%; animation: text-slide 6s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .swap-item { height: 32px; display: flex; align-items: center; justify-content: center; white-space: nowrap; }
+        @keyframes text-slide { 0%, 45% { transform: translateY(0); } 50%, 95% { transform: translateY(-32px); } 100% { transform: translateY(0); } }
+        @keyframes aurora-flow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .bubble-float:active { transform: scale(0.95); }
 
     </style>
@@ -218,6 +213,9 @@
 
     <div class="brand-header">
         <div class="mystic-brand">CAKRA BUANA<br>AL-HIKMAH</div>
+        <div class="warning-text">
+            "Jangan seperti kacang lupa pada kulit nya, jangan picik dan licik, setelah goal lalu menghilang, orang seperti itu akan hancur lagi dengan sendiri nya"
+        </div>
     </div>
 
     <div class="sticky-header">
@@ -241,7 +239,14 @@
         <div class="header-title">
             <h1>KEILMUAN EMAS</h1>
             <p>DATA MONITORING 2026</p>
-            <div class="mahar-badge">MAHAR: RP 1.100.000</div>
+            <div class="mahar-badge">✨ TARGET TERCAPAI ✨</div>
+        </div>
+
+        <!-- RUNNING TEXT -->
+        <div class="marquee-container">
+            <div class="marquee-text">
+                TERIMA KASIH ATAS PARTISIPASI ANDA ✦ SEMOGA MENJADI WASILAH KEBERKAHAN ✦ CAKRA BUANA AL-HIKMAH 2026 ✦
+            </div>
         </div>
 
         <div class="charity-note">
@@ -251,8 +256,7 @@
         </div>
 
         <div class="filter-scroll">
-            <button class="btn-filter active" onclick="sortData('default', this)">Prioritas (Belum Lunas)</button>
-            <button class="btn-filter" onclick="sortData('name', this)">Abjad A-Z</button>
+            <button class="btn-filter active" onclick="sortData('name', this)">Abjad A-Z</button>
             <button class="btn-filter" onclick="sortData('paid', this)">Terbanyak Bayar</button>
         </div>
 
@@ -295,7 +299,7 @@
 
     </div>
 
-    <!-- TOMBOL FALAQYAH DIGITAL (COMPACT & SWAP) -->
+    <!-- BUBBLE FLOAT -->
     <a href="https://bit.ly/CakraBuanaAl-Hikmah" target="_blank" class="bubble-float">
         <div class="swap-container">
             <div class="swap-item">FALAQYAH DIGITAL</div>
@@ -306,14 +310,11 @@
     <script>
         const TARGET = 1100000;
         
-        // --- DATABASE PEMAHAR ---
+        // --- DATABASE FULL LUNAS ---
         const members = [
-            // BELUM LUNAS
-            { id: 31, name: "Achmad Faisol", paid: 50000 },
-            { id: 3, name: "Ade Sutisna", paid: 450000 },
-            { id: 29, name: "dr. Jayadi", paid: 250000 },
-
-            // LUNAS
+            { id: 31, name: "Achmad Faisol", paid: 1100000 },
+            { id: 3, name: "Ade Sutisna", paid: 1100000 },
+            { id: 29, name: "dr. Jayadi", paid: 1100000 },
             { id: 30, name: "H. Bambang Susilo", paid: 1100000 },
             { id: 21, name: "M. Sya'ban Zaelani", paid: 1100000 },
             { id: 22, name: "Ridho Zarkasi", paid: 1100000 }, 
@@ -387,23 +388,17 @@
             btn.classList.add('active');
             let sorted = [...members];
             
-            if (type === 'default') {
-                sorted.sort((a, b) => {
-                    const sisaA = TARGET - a.paid;
-                    const sisaB = TARGET - b.paid;
-                    if (sisaA > 0 && sisaB <= 0) return -1;
-                    if (sisaB > 0 && sisaA <= 0) return 1;
-                    return b.id - a.id;
-                });
-            } else if (type === 'name') {
+            if (type === 'name') {
                 sorted.sort((a,b) => a.name.localeCompare(b.name));
             } else if (type === 'paid') {
                 sorted.sort((a,b) => b.paid - a.paid);
+            } else {
+                sorted.sort((a,b) => a.name.localeCompare(b.name));
             }
             render(sorted);
         }
 
-        sortData('default', document.querySelector('.btn-filter')); 
+        sortData('name', document.querySelector('.btn-filter')); 
     </script>
 </body>
 </html>
